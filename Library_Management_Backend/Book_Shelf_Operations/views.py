@@ -3,10 +3,15 @@ from.serializers import BookShelfModelSerializer
 from rest_framework import viewsets
 from.models import BookShelfModel
 from rest_framework import status
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 
 class BookShelfViewInsert(viewsets.ModelViewSet):
+
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes     = [IsAuthenticated]
 
     serializer_class = BookShelfModelSerializer
     queryset         = BookShelfModel.objects.all()
